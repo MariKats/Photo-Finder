@@ -25,8 +25,8 @@ class PhotoList extends Component {
     }
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
-      <Card key={id}>
-        <Image style={{width:250, height:250, margin:8}} src={imageUrl}/>
+      <Card key={id} style={{width:250}}>
+        <Image style={{width:250, height:250}} src={imageUrl}/>
         <Card.Content extra>
           <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
           <Modal.Header>Selected Photo:</Modal.Header>
