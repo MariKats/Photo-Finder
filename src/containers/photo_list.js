@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Image, Icon, Segment, Modal, Button, Header } from "semantic-ui-react";
-import { Pagination } from 'react-bootstrap';
+import { Card, Image, Segment, Modal, Button, Header } from "semantic-ui-react";
 
 class PhotoList extends Component {
   constructor(props){
@@ -11,9 +10,9 @@ class PhotoList extends Component {
     };
   }
 
-  handleSelect(eventKey) {
+  handleSelect(event) {
     this.setState({
-      activePage: eventKey
+      activePage: event.target.id
     });
   }
 
@@ -25,10 +24,10 @@ class PhotoList extends Component {
     }
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
-      <Card >
-        <Image fluid style={{width:250, height:250, margin:8}} src={imageUrl}/>
+      <Card key={id}>
+        <Image style={{width:250, height:250, margin:8}} src={imageUrl}/>
         <Card.Content extra>
-          <Modal size="medium" trigger={<Button icon="expand"></Button>} closeIcon='close'>
+          <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
           <Modal.Header>Selected Photo:</Modal.Header>
             <Modal.Content image>
               <Image wrapped size='large' src={imageUrl}/>
@@ -42,7 +41,7 @@ class PhotoList extends Component {
                   </Modal.Description>
             </Modal.Content>
           </Modal>
-    </Card.Content>
+        </Card.Content>
       </Card>
     )
   }
@@ -52,27 +51,38 @@ class PhotoList extends Component {
         return null
       }
         const photos = this.props.photolist[0].photos.photo
-        const pages = Math.ceil(photos.length/10)
         const endpoint = (this.state.activePage*10)
         const startpoint = endpoint-10
         const displayedPhotos = photos.slice(startpoint, endpoint)
+        const pageNumbers = [];
+          for (let i = 1; i <= Math.ceil(photos.length / 10); i++) {
+            pageNumbers.push(i);
+          }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <div className="pagination">
+            <a
+              className="w3-button"
+              key={number}
+              id={number}
+              onClick={this.handleSelect.bind(this)}>
+              {number}
+            </a>
+            </div>
+          );
+        });
 
         return (
           <Segment padded >
             <Card.Group itemsPerRow={5}>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Card.Group>
-            <Pagination
-              prev
-              next
-              first
-              last
-              ellipsis
-              boundaryLinks
-              items={pages}
-              maxButtons={5}
-              activePage={this.state.activePage}
-              onSelect={this.handleSelect.bind(this)} />
+              <div class="w3-center">
+                <div class="w3-bar">
+                  {renderPageNumbers}
+                </div>
+              </div>
           </Segment>
         );
     }
