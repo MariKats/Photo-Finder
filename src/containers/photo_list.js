@@ -62,10 +62,9 @@ class PhotoList extends Component {
 
         const renderPageNumbers = pageNumbers.map(number => {
           return (
-            <div className="pagination">
+            <div key={number} className="pagination">
             <a
               className="w3-button"
-              key={number}
               id={number}
               onClick={this.handleSelect.bind(this)}>
               {number}
@@ -79,8 +78,8 @@ class PhotoList extends Component {
             <Card.Group itemsPerRow={5}>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Card.Group>
-              <div style={{paddingTop: 20}} class="w3-center">
-                <div class="w3-bar">
+              <div style={{paddingTop: 20}} className="w3-center">
+                <div className="w3-bar">
                   {renderPageNumbers}
                 </div>
               </div>
