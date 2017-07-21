@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Image, Segment, Modal, Button, Header } from "semantic-ui-react";
+import { Card, Image, Segment, Modal, Button, Header, Container } from "semantic-ui-react";
 
 class PhotoList extends Component {
   constructor(props){
@@ -74,7 +74,7 @@ class PhotoList extends Component {
         });
 
         return (
-          <Segment padded >
+          <Container style={{paddingTop: 20}}>
             <Card.Group itemsPerRow={5}>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Card.Group>
@@ -83,7 +83,7 @@ class PhotoList extends Component {
                   {renderPageNumbers}
                 </div>
               </div>
-          </Segment>
+          </Container>
         );
     }
 }
