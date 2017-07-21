@@ -11,6 +11,7 @@ class PhotoList extends Component {
   }
 
   handleSelect(event) {
+    console.log(process.env.API_KEY)
     this.setState({
       activePage: event.target.id
     });
@@ -47,7 +48,7 @@ class PhotoList extends Component {
   }
 
     render() {
-      if (!this.props.photolist[0]){
+      if (!this.props.photolist[0] || !this.props.photolist[0].photos){
         return null
       }
         const photos = this.props.photolist[0].photos.photo
