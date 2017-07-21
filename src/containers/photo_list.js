@@ -78,7 +78,7 @@ class PhotoList extends Component {
             <Card.Group itemsPerRow={5}>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Card.Group>
-              <div class="w3-center">
+              <div style={{paddingTop: 20}} class="w3-center">
                 <div class="w3-bar">
                   {renderPageNumbers}
                 </div>
