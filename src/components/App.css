@@ -1,0 +1,27 @@
+.App { text-align: center; }
+
+.photolist {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #222;
+  height: 110px;
+  padding: 20px;
+  color: white;
+}
+
+.pagination a {
+    color: black;
+    float: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
