@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Image, Segment, Modal, Button, Header, Container } from "semantic-ui-react";
+import { Card, Image, Container, Modal, Button, Header } from "semantic-ui-react";
 
 class PhotoList extends Component {
   constructor(props){
@@ -25,8 +25,8 @@ class PhotoList extends Component {
     }
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
-      <Card key={id} style={{width:250}}>
-        <Image style={{width:250, height:250}} src={imageUrl}/>
+      <Card key={id} style={{width:200}}>
+        <Image style={{width:200, height:200}} src={imageUrl}/>
         <Card.Content extra>
           <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
           <Modal.Header>Selected Photo:</Modal.Header>
