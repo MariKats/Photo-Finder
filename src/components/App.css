@@ -23,3 +23,27 @@
     transition: background-color .3s;
     border: 1px solid #ddd;
 }
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.centered  {
+    display: inline-block  !important;
+    vertical-align: middle !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.pagination a.active {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

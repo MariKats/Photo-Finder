@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Image, Container, Modal, Button, Header } from "semantic-ui-react";
+import { Card, Image, Grid, Modal, Button, Header } from "semantic-ui-react";
 
 class PhotoList extends Component {
   constructor(props){
@@ -11,10 +11,26 @@ class PhotoList extends Component {
   }
 
   handleSelect(event) {
-    console.log(process.env.API_KEY)
     this.setState({
       activePage: event.target.id
     });
+    // event.className="normal" ? event.className="active" : event.className="normal"
+  }
+
+  onLeftArrowClick(event) {
+    if (this.state.activePage>=2){
+      this.setState({
+        activePage: Number(this.state.activePage)-1
+      });
+    }
+  }
+
+  onRightArrowClick(event) {
+    if (this.state.activePage<10){
+      this.setState({
+        activePage: Number(this.state.activePage)+1
+      });
+    }
   }
 
 
@@ -25,6 +41,7 @@ class PhotoList extends Component {
     }
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
+      <Grid.Column style={{paddingTop:30}}>
       <Card key={id} style={{width:200}}>
         <Image style={{width:200, height:200}} src={imageUrl}/>
         <Card.Content extra>
@@ -44,6 +61,8 @@ class PhotoList extends Component {
           </Modal>
         </Card.Content>
       </Card>
+      </Grid.Column>
+
     )
   }
 
@@ -62,28 +81,34 @@ class PhotoList extends Component {
 
         const renderPageNumbers = pageNumbers.map(number => {
           return (
-            <div key={number} className="pagination">
-            <a
-              className="w3-button"
-              id={number}
-              onClick={this.handleSelect.bind(this)}>
-              {number}
-            </a>
-            </div>
+              <a
+                className="w3-button"
+                className="normal"
+                id={number}
+                onClick={this.handleSelect.bind(this)}>
+                {number}
+              </a>
           );
         });
 
         return (
-          <Container style={{paddingTop: 20}}>
-            <Card.Group itemsPerRow={5}>
+          <Grid className="centered" container centered textAlign="center" columns='five'>
+            <Grid.Row>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
-            </Card.Group>
-              <div style={{paddingTop: 20}} className="w3-center">
-                <div className="w3-bar">
-                  {renderPageNumbers}
+            </Grid.Row>
+            <Grid.Row>
+                <div className="w3-center">
+                  <div className="w3-bar">
+                    <div className="pagination">
+                      <a
+                       onClick={this.onLeftArrowClick.bind(this)}>&laquo;</a>
+                        {renderPageNumbers}
+                      <a onClick={this.onRightArrowClick.bind(this)}>&raquo;</a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-          </Container>
+            </Grid.Row>
+          </Grid>
         );
     }
 }
