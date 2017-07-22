@@ -41,25 +41,25 @@ class PhotoList extends Component {
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
       <Grid.Column key={id} style={{paddingTop:30}}>
-      <Card style={{width:200}}>
-        <Image style={{width:200, height:200}} src={imageUrl}/>
-        <Card.Content extra>
-          <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
-          <Modal.Header>Selected Photo:</Modal.Header>
-            <Modal.Content image>
-              <Image wrapped size='large' src={imageUrl}/>
-                  <Modal.Description>
-                    <Header>Title</Header>
-                    <p>{title}</p>
-                    <Header>ID</Header>
-                    <p>{id}</p>
-                    <Header>Owner</Header>
-                    <p>{owner}</p>
-                  </Modal.Description>
-            </Modal.Content>
-          </Modal>
-        </Card.Content>
-      </Card>
+        <Card color="teal" style={{width:200}}>
+          <Image style={{width:200, height:200}} src={imageUrl}/>
+          <Card.Content>
+            <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
+            <Modal.Header>Selected Photo:</Modal.Header>
+              <Modal.Content image>
+                <Image wrapped size='large' src={imageUrl}/>
+                    <Modal.Description>
+                      <Header>Title</Header>
+                      <p>{title}</p>
+                      <Header>ID</Header>
+                      <p>{id}</p>
+                      <Header>Owner</Header>
+                      <p>{owner}</p>
+                    </Modal.Description>
+              </Modal.Content>
+            </Modal>
+          </Card.Content>
+        </Card>
       </Grid.Column>
 
     )
@@ -74,31 +74,30 @@ class PhotoList extends Component {
         const startpoint = endpoint-10
         const displayedPhotos = photos.slice(startpoint, endpoint)
         const pageNumbers = [];
-          for (let i = 1; i <= Math.ceil(photos.length / 10); i++) {
-            pageNumbers.push(i);
-          }
+        for (let i = 1; i <= Math.ceil(photos.length/10); i++) {
+          pageNumbers.push(i);
+        }
 
         const renderPageNumbers = pageNumbers.map(number => {
           return (
-              <a
-                key={number}
-                className={this.state.activePage===number?"active":"normal"}
-                id={number}
-                onClick={this.handleSelect.bind(this)}>
-                {number}
-              </a>
+            <a
+              key={number}
+              className={this.state.activePage===number?"active":"normal"}
+              id={number}
+              onClick={this.handleSelect.bind(this)}>
+              {number}
+            </a>
           );
         });
 
         return (
-          <Grid className="centered" container centered textAlign="center" columns='five'>
+          <Grid className="centered" container columns='five'>
             <Grid.Row>
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Grid.Row>
             <Grid.Row>
               <div className="pagination">
-                <a
-                 onClick={this.onLeftArrowClick.bind(this)}>&laquo;</a>
+                <a onClick={this.onLeftArrowClick.bind(this)}>&laquo;</a>
                   {renderPageNumbers}
                 <a onClick={this.onRightArrowClick.bind(this)}>&raquo;</a>
               </div>
