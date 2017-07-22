@@ -12,9 +12,8 @@ class PhotoList extends Component {
 
   handleSelect(event) {
     this.setState({
-      activePage: event.target.id
+      activePage: Number(event.target.id)
     });
-    // event.className="normal" ? event.className="active" : event.className="normal"
   }
 
   onLeftArrowClick(event) {
@@ -41,8 +40,8 @@ class PhotoList extends Component {
     }
     const imageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`
     return (
-      <Grid.Column style={{paddingTop:30}}>
-      <Card key={id} style={{width:200}}>
+      <Grid.Column key={id} style={{paddingTop:30}}>
+      <Card style={{width:200}}>
         <Image style={{width:200, height:200}} src={imageUrl}/>
         <Card.Content extra>
           <Modal trigger={<Button icon="expand"></Button>} closeIcon='close'>
@@ -82,8 +81,8 @@ class PhotoList extends Component {
         const renderPageNumbers = pageNumbers.map(number => {
           return (
               <a
-                className="w3-button"
-                className="normal"
+                key={number}
+                className={this.state.activePage===number?"active":"normal"}
                 id={number}
                 onClick={this.handleSelect.bind(this)}>
                 {number}
@@ -97,16 +96,12 @@ class PhotoList extends Component {
               {displayedPhotos.map(this.renderPhoto.bind(this))}
             </Grid.Row>
             <Grid.Row>
-                <div className="w3-center">
-                  <div className="w3-bar">
-                    <div className="pagination">
-                      <a
-                       onClick={this.onLeftArrowClick.bind(this)}>&laquo;</a>
-                        {renderPageNumbers}
-                      <a onClick={this.onRightArrowClick.bind(this)}>&raquo;</a>
-                    </div>
-                  </div>
-                </div>
+              <div className="pagination">
+                <a
+                 onClick={this.onLeftArrowClick.bind(this)}>&laquo;</a>
+                  {renderPageNumbers}
+                <a onClick={this.onRightArrowClick.bind(this)}>&raquo;</a>
+              </div>
             </Grid.Row>
           </Grid>
         );
