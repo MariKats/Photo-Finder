@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPhotoList } from '../actions';
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Form } from 'semantic-ui-react';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -21,15 +21,17 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <Input
-        type='text'
-        placeholder='Search...'
-        value={this.state.term}
-        onChange={this.onInputChange.bind(this)}
-        action>
-        <input />
-        <Button type='submit' onClick={this.onFormSubmit.bind(this)}>Search</Button>
-      </Input>
+      <Form onClick={this.onFormSubmit.bind(this)}>
+        <Input
+          size="large"
+          type='text'
+          icon={{ name: 'search', link: true }}
+          placeholder='Search...'
+          value={this.state.term}
+          onChange={this.onInputChange.bind(this)}
+          >
+        </Input>
+      </Form>
     );
   }
 }
