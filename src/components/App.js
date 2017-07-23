@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Welcome to Photo-Finder!</h2>
+          <h2 style={{fontFamily: 'Special Elite', fontSize: '2em'}}>Welcome to Photo-Finder.</h2>
           <SearchBar />
         </div>
           <PhotoList />

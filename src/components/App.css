@@ -1,4 +1,14 @@
-.App { text-align: center; }
+body {
+    background-image: url("https://static.pexels.com/photos/513074/pexels-photo-513074.jpeg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.App {
+  text-align: center;
+}
 
 .photolist {
   text-align: left;
@@ -6,9 +16,10 @@
 
 .App-header {
   background-color: #222;
-  height: 110px;
+  height: 130px;
   padding: 20px;
   color: white;
+  /*font-size: 10em;*/
 }
 
 .pagination {

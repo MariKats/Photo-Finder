@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPhotoList } from '../actions';
+import { Input, Button } from 'semantic-ui-react';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -9,10 +10,10 @@ class SearchBar extends Component {
   }
 
   onInputChange(event) {
-    this.setState({ term: event.target.value });
+    this.setState({ term: event.target.value }, console.log(this.state.term));
   }
 
-  onFormSubmit(event) {
+  onFormSubmit(event, data) {
     event.preventDefault();
     this.props.fetchPhotoList(this.state.term);
     this.setState({ term: "" });
@@ -20,17 +21,15 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit.bind(this)} className="input-group">
-        <input
-          placeholder="Search..."
-          className="form-control"
-          value={this.state.term}
-          onChange={this.onInputChange.bind(this)}
-        />
-        <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Submit</button>
-        </span>
-      </form>
+      <Input
+        type='text'
+        placeholder='Search...'
+        value={this.state.term}
+        onChange={this.onInputChange.bind(this)}
+        action>
+        <input />
+        <Button type='submit' onClick={this.onFormSubmit.bind(this)}>Search</Button>
+      </Input>
     );
   }
 }
